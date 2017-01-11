@@ -1,0 +1,16 @@
+{
+  "name": "aurora",
+  "authors": [
+    "FranciscoFernando <franciscop@startnet.co>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.6.1",
+    "font-awesome": "^4.7.0",
+    "angular-material": "^1.1.1",
+    "jquery": "1.11.2"
+  }
+}

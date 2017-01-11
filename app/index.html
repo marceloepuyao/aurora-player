@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app="aurora">
+	<head>
+		<title>Aurora play</title>
+		<link 
+			rel="stylesheet" 
+			type="text/css" 
+			href="./css/style.css" 
+		 />
+		<link 
+			rel="stylesheet" 
+			type="text/css" 
+			href="./bower_components/angular-material/angular-material.min.css"
+		 />
+		<link 
+			rel="stylesheet" 
+			type="text/css" 
+			href="./bower_components/font-awesome/css/font-awesome.min.css"
+		 />
+	</head>
+	<body 
+		ng-controller="general as g"
+		ng-mousemove="g.window.activate()"
+	>
+		<md-toolbar 
+			class="md-hue-2"
+			ng-style="{opacity: g.window.active?'1':'0'}" 
+		>
+			<div class="md-toolbar-tools">
+				<h2>
+					<span>Aurora Play</span>
+				</h2>
+				<span flex></span>
+				<md-button 
+					class="md-icon-button" 
+					aria-label="More" 
+					ng-init="showSlider = false;"
+					ng-click="showSlider = showSlider?false:true;"
+				>
+					<i 
+						class="fa fa-eye" 
+						aria-hidden="true"
+					></i>
+				</md-button>
+				<md-button 
+					class="md-icon-button" 
+					aria-label="More" 
+					ng-click="g.window.close()"
+				>
+					<i 
+						class="fa fa-times" 
+						aria-hidden="true"
+					></i>
+				</md-button>
+				<md-slider-container 
+					flex 
+					ng-show="showSlider && g.window.active"
+				>
+					<md-slider 
+						md-discrete 
+						ng-model="g.window.opacity" 
+						min="15" 
+						max="100" 
+						step="1" 
+						class="md-primary"
+						md-vertical
+					></md-slider>
+					</md-slider>
+				</md-slider-container>
+			</div>
+		</md-toolbar>
+		<div 
+			class="tabFrame" 
+			ng-controller="tab as c"
+		>
+			<webview 
+				src="https://www.netflix.com"
+				ng-style="{opacity: g.window.opacity/100}"
+				plugins="on"
+			></webview>
+			<div class="loadSection">
+				<div layout="row" layout-sm="column" layout-align="space-around">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</div>
+			</div>
+		</div>
+		
+		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+		<script 
+			type="text/javascript"
+			src="./bower_components/jquery/dist/jquery.min.js"
+		></script>
+		<script>if (window.module) module = window.module;</script>
+
+		<script 
+			type="text/javascript" 
+			src="./bower_components/angular/angular.min.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./bower_components/angular-aria/angular-aria.min.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./bower_components/angular-animate/angular-animate.min.js"
+		></script>
+		<script 
+			type="text/javascript" 
+			src="./bower_components/angular-material/angular-material.min.js"
+		></script>
+
+		<script 
+			type="text/javascript"
+			src="./libs/modules/aurora.controller.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./libs/controllers/home.controller.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./libs/controllers/tab.controller.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./libs/controllers/general.controller.js"
+		></script>
+
+		<script 
+			type="text/javascript"
+			src="./libs/services/general.service.js"
+		></script>
+		<script type="text/javascript">
+			var webview = $('webview');
+			webview.css('visibility', 'hidden');
+			webview[0].addEventListener('did-stop-loading', function() {
+				webview.parents('.tabFrame').find('.loadSection').css('display', 'none');
+				webview.css('visibility', 'inherit');
+			});
+		</script>
+	</body>
+</html>
