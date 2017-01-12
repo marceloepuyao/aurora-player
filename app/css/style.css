@@ -11,14 +11,14 @@ body, html {
 	overflow: hidden;
 }
 
-.tabFrame, webview {
+.tabFrame {
 	position: relative;
 	height: 100%;
 	width: 100%;
 }
 .tabFrame .loadSection {
 	position: absolute;
-	top: 1px;
+	top: 0px;
 	width: 100%;
 	height: 100%;
 	background: #fff;

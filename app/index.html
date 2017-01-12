@@ -34,8 +34,7 @@
 				<md-button 
 					class="md-icon-button" 
 					aria-label="More" 
-					ng-init="showSlider = false;"
-					ng-click="showSlider = showSlider?false:true;"
+					ng-click="g.window.panelOpacity = g.window.panelOpacity?false:true;"
 				>
 					<i 
 						class="fa fa-eye" 
@@ -54,7 +53,7 @@
 				</md-button>
 				<md-slider-container 
 					flex 
-					ng-show="showSlider && g.window.active"
+					ng-show="g.window.panelOpacity && g.window.active"
 				>
 					<md-slider 
 						md-discrete 
@@ -129,12 +128,23 @@
 			src="./libs/services/general.service.js"
 		></script>
 		<script type="text/javascript">
-			var webview = $('webview');
-			webview.css('visibility', 'hidden');
-			webview[0].addEventListener('did-stop-loading', function() {
-				webview.parents('.tabFrame').find('.loadSection').css('display', 'none');
-				webview.css('visibility', 'inherit');
-			});
+			(function() {
+				var webview = $('webview');
+				webview.css('visibility', 'hidden');
+				webview[0].addEventListener('did-stop-loading', function() {
+					webview.parents('.tabFrame').find('.loadSection').css('display', 'none');
+					webview.css('visibility', 'inherit');
+				});
+
+				$(window).resize(webviewSize);
+				webviewSize();
+				
+				function webviewSize() {
+					$('webview').css({
+						height: ($(window).height()-$('md-toolbar ').height())+'px'
+					});
+				}
+			})();
 		</script>
 	</body>
 </html>

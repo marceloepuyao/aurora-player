@@ -14,6 +14,7 @@
 
 		self.window = {
 			opacity: 100,
+			panelOpacity: false,
 			active: true,
 			activate: function() {
 				lastMove = Number(new Date());
@@ -31,6 +32,7 @@
 			var currentTime = Number(new Date());
 			if(currentTime-lastMove >= 4000) {
 				self.window.active = false;
+				self.window.panelOpacity = false;
 			}
 		}, 4000);
 	}

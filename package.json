@@ -4,7 +4,8 @@
   "description": "Aurora help you job and watch netflix",
   "main": "app/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "node_modules/.bin/build --linux"
   },
   "author": "Franciscofernando",
   "license": "ISC",
@@ -16,8 +17,7 @@
     "files": "app/**/*",
     "extraFiles": "plugins/*",
     "directories": {
-      "buildResources": "build",
-      "output": "dist"
+      "output": "build"
     }
   }
 }
