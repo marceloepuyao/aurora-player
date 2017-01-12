@@ -36,10 +36,18 @@ function createWindow () {
   mainWindow.setAlwaysOnTop(true)
 }
 
-app.commandLine.appendSwitch('widevine-cdm-path', './plugins/libwidevinecdmadapter.so')
-app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
-app.commandLine.appendSwitch('enable-transparent-visuals')
-app.commandLine.appendSwitch('disable-gpu')
+if(process.platform === 'darwin') {
+  app.commandLine.appendSwitch('widevine-cdm-path', './plugins/widevinecdmadapter.plugin')
+  app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
+} else if(process.platform === 'linux') {
+  app.commandLine.appendSwitch('widevine-cdm-path', './plugins/libwidevinecdmadapter.so')
+  app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
+  app.commandLine.appendSwitch('enable-transparent-visuals')
+  app.commandLine.appendSwitch('disable-gpu')
+} else if(/^win/.test(process.platform)) {
+  app.commandLine.appendSwitch('widevine-cdm-path', './plugins/widevinecdmadapter.dll')
+  app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
+}
 
 app.on('ready', createWindow)
 
