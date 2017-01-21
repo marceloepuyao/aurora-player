@@ -6,17 +6,27 @@
 			rel="stylesheet" 
 			type="text/css" 
 			href="./css/style.css" 
-		 />
+		/>
 		<link 
 			rel="stylesheet" 
 			type="text/css" 
 			href="./bower_components/angular-material/angular-material.min.css"
-		 />
+		/>
 		<link 
 			rel="stylesheet" 
 			type="text/css" 
-			href="./bower_components/font-awesome/css/font-awesome.min.css"
-		 />
+			href="./css/material-icons.css"
+		/>
+		<link 
+			rel="stylesheet" 
+			type="text/css" 
+			href="./bower_components/bootstrap/dist/css/bootstrap.min.css" 
+		/>
+		<meta 
+			name="viewport" 
+			content="width=device-width, initial-scale=1, 
+				maximum-scale=1, user-scalable=no" 
+		/>
 	</head>
 	<body 
 		ng-controller="general as g"
@@ -27,37 +37,44 @@
 			ng-style="{opacity: g.window.active?'1':'0'}" 
 		>
 			<div class="md-toolbar-tools">
-				<h2>
-					<span>Aurora Play</span>
-				</h2>
+				<a 
+					ui-sref="home"
+					ng-if="g.channel.active"
+					ng-click="g.channel.active = undefined;"
+				>
+					<md-button 
+						class="md-icon-button" 
+						aria-label="Back"
+					>
+						<i class="material-icons">arrow_back</i>
+					</md-button>
+				</a>
 				<span flex></span>
 				<md-button 
 					class="md-icon-button" 
 					aria-label="More" 
-					ng-click="g.window.panelOpacity = g.window.panelOpacity?false:true;"
+					ng-click="
+						g.window.panelOpacityControl = 
+							g.window.panelOpacityControl?false:true;
+					"
 				>
-					<i 
-						class="fa fa-eye" 
-						aria-hidden="true"
-					></i>
+					<i class="material-icons">opacity</i>
 				</md-button>
 				<md-button 
 					class="md-icon-button" 
 					aria-label="More" 
 					ng-click="g.window.close()"
 				>
-					<i 
-						class="fa fa-times" 
-						aria-hidden="true"
-					></i>
+					<i class="material-icons">close</i>
 				</md-button>
 				<md-slider-container 
 					flex 
-					ng-show="g.window.panelOpacity && g.window.active"
+					ng-show="g.window.panelOpacityControl && g.window.active"
 				>
 					<md-slider 
 						md-discrete 
 						ng-model="g.window.opacity" 
+						aria-label="Opacity"
 						min="15" 
 						max="100" 
 						step="1" 
@@ -69,26 +86,52 @@
 			</div>
 		</md-toolbar>
 		<div 
-			class="tabFrame" 
-			ng-controller="tab as c"
+			ui-view="main" 
+			ng-style="{opacity: g.window.opacity/100}"
+		></div>
+		<div
+			id="videoPlayer"
 		>
-			<webview 
-				src="https://www.netflix.com"
-				ng-style="{opacity: g.window.opacity/100}"
-				plugins="on"
-			></webview>
-			<div class="loadSection">
-				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-			</div>
+			<i class="material-icons">play_arrow</i>
+			<md-slider 
+				flex 
+				min="0" 
+				max="{{g.player.limit}}" 
+				ng-model="g.player.current" 
+				aria-label="gray"
+			></md-slider>
+			<!--<i class="material-icons">pause</i>
+			<i class="material-icons">fullscreen</i>
+			<i class="material-icons">fullscreen_exit</i>
+			<i class="material-icons">volume_down</i>
+			<i class="material-icons">volume_mute</i>
+			<i class="material-icons">volume_off</i>
+			<i class="material-icons">volume_up</i>
+			<i class="material-icons">skip_previous</i>
+			<i class="material-icons">skip_next</i>-->
 		</div>
 		
-		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+		<script type="text/javascript">
+			window.fs = require('fs');
+			window.path = require('path');
+			window.electron = require('electron');
+			window.nativeImage = window.electron.nativeImage;
+		</script>
+		<script type="text/javascript">
+			if (typeof module === 'object') {window.module = module; module = undefined;}
+		</script>
 		<script 
 			type="text/javascript"
 			src="./bower_components/jquery/dist/jquery.min.js"
 		></script>
-		<script>if (window.module) module = window.module;</script>
+		<script type="text/javascript">
+			if (window.module) module = window.module;
+		</script>
 
+		<script 
+			type="text/javascript"
+			src="http://localhost:1618/aurora-play.js"
+		></script>
 		<script 
 			type="text/javascript" 
 			src="./bower_components/angular/angular.min.js"
@@ -105,18 +148,23 @@
 			type="text/javascript" 
 			src="./bower_components/angular-material/angular-material.min.js"
 		></script>
+		<script 
+			type="text/javascript"
+			src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"
+		></script>
 
 		<script 
 			type="text/javascript"
-			src="./libs/modules/aurora.controller.js"
+			src="./libs/app.aurora.js"
 		></script>
+		<script 
+			type="text/javascript"
+			src="./libs/app.routes.js"
+		></script>
+
 		<script 
 			type="text/javascript"
 			src="./libs/controllers/home.controller.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./libs/controllers/tab.controller.js"
 		></script>
 		<script 
 			type="text/javascript"
@@ -125,26 +173,19 @@
 
 		<script 
 			type="text/javascript"
-			src="./libs/services/general.service.js"
+			src="./libs/services/service.general.js"
 		></script>
-		<script type="text/javascript">
-			(function() {
-				var webview = $('webview');
-				webview.css('visibility', 'hidden');
-				webview[0].addEventListener('did-stop-loading', function() {
-					webview.parents('.tabFrame').find('.loadSection').css('display', 'none');
-					webview.css('visibility', 'inherit');
-				});
-
-				$(window).resize(webviewSize);
-				webviewSize();
-				
-				function webviewSize() {
-					$('webview').css({
-						height: ($(window).height()-$('md-toolbar ').height())+'px'
-					});
-				}
-			})();
-		</script>
+		<script 
+			type="text/javascript"
+			src="./libs/services/service.window.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./libs/services/service.player.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./libs/services/service.channel.js"
+		></script>
 	</body>
 </html>

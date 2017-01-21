@@ -11,5 +11,7 @@
 		var g = this;
 
 		g.window = generalService.window;
+		g.channel = generalService.channel;
+		g.player = generalService.player;
 	}
 })();

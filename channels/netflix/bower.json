@@ -1,0 +1,11 @@
+{
+  "name": "aurora-channel-netflix",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "Franciscofernando"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {}
+}

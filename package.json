@@ -11,9 +11,10 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^1.4.14",
-    "electron-builder": "^11.2.3"
+    "electron-builder": "^11.2.4"
   },
   "build": {
+    "appId": "aurora-play",
     "files": "app/**/*",
     "extraFiles": "plugins/*",
     "directories": {

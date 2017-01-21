@@ -9,8 +9,9 @@
   "homepage": "",
   "dependencies": {
     "angular": "^1.6.1",
-    "font-awesome": "^4.7.0",
+    "angular-ui-router": "ui-router#^0.3.1",
     "angular-material": "^1.1.1",
-    "jquery": "1.11.2"
+    "jquery": "1.11.2",
+    "bootstrap": "^3.3.7"
   }
 }

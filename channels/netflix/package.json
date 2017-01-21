@@ -1,0 +1,14 @@
+{
+	"name": "aurora-channel-netflix",
+	"channelName": "Netflix",
+	"channelIcon": "img/icon.png",
+	"channelDescription": "En este canal puedes reproducir el sitio de Netflix.",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.html",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Franciscofernando",
+	"license": "ISC"
+}
