@@ -1,32 +1,40 @@
 (function() {
 	'use strict';
-	var socket = io("http://localhost:1618");
+	var query = window.packageContent?{query: window.packageContent}:undefined;
+	var socket = io("http://localhost:1618", query);
 	var connected = false;
 	var emitQueue = [];
+	var onQueue = [];
 
-	socket.on('connected', function() {
+	socket.on('connected', function(isChannel) {
 		connected = true;
 		emitQueue.forEach(function(emitData) {
 			socket.emit(emitData.name, emitData.data);
 		});
+		onQueue.forEach(function(onData) {
+			socket.on(onData.name, onData.callback);
+		})
 	});
 
-	function AuroraPlay() {
+	function AuroraPlay(packageData) {
 		this.on = _on;
 		this.emit = _emit;
-		this.request = function(){};
-		this.fs = {
-			read: function() {},
-			write: function() {}
-		};
+
 	}
-	window.auroraPlay = new AuroraPlay();
+	window.auroraPlay = new AuroraPlay((window.packageContent?window.packageContent.channelName:undefined));
 
 	function _on(events, callback) {
 		events
 			.split(/\s/g)
 			.forEach(function(event) {
-				socket.on(event, callback);
+				if(connected) {
+					socket.on(event, callback);
+				} else {
+					onQueue.push({
+						name: event, 
+						callback: callback
+					});
+				}
 			});
 	}
 
@@ -44,4 +52,17 @@
 				}
 			});
 	}
+/*
+	function ChildPage(data) {
+		this.on = function(events, callback) {
+
+		};
+	}
+
+	function addChildPage(data) {
+		if(!data) {
+			return undefined;
+		}
+		return new ChildPage(data);
+	}*/
 })();

@@ -62,6 +62,8 @@
 					description: channelDescription,
 					folder: folderName,
 					main: channelMain,
+					package: packageContent,
+					packageStr: JSON.stringify(packageContent),
 					children: {}
 				});
 			});
@@ -86,7 +88,7 @@
 
 		auroraPlay.on('addChild', function(child) {
 			$rootScope.$apply(function() {
-				if(self.active) {
+				if(self.active && child) {
 					if(child.active) {
 						for(var name in self.active.children) {
 							self.active.children[name].active = false;	

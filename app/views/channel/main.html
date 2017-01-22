@@ -1,4 +1,5 @@
 <webview 
+	ng-init="channel = g.channel.active"
 	src="{{g.channel.active.main}}"
 	plugins="on"
 	ng-style="
@@ -7,10 +8,10 @@
 			width: !g.channel.childIsActive()?'100%':'0px'
 		}
 	"
+	useragent="{{g.window.userAgent+'|'+channel.packageStr}}"
 ></webview>
 <webview 
-	class="child-channel"
-	ng-repeat-start="(name, child) in g.channel.active.children"
+	ng-repeat-start="(name, child) in channel.children"
 	ng-style="
 		{
 			height: child.active?'100%':'0px',
@@ -19,26 +20,13 @@
 	"
 	ng-src="{{g.channel.srcUrl(child.main)}}"
 	plugins="on"
+	class="child-channel"
+	useragent="{{g.window.userAgent}}"
+	channel-child
 ></webview>
-<div class="loadSection">
-	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-</div>
-<script 
-	type="text/javascript"
+<div 
+	class="loadSection" 
 	ng-repeat-end
 >
-	(function() {
-		var webview = $('.child-channel:last');
-		webview.css({
-			height: '0px',
-			width: '0px'
-		});
-		webview[0].addEventListener('did-stop-loading', function() {
-			webview.next('.loadSection').css('display', 'none');
-			webview.css({
-				height: '100%',
-				width: '100%'
-			});
-		});
-	})();
-</script>
+	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>

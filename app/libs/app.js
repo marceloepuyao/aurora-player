@@ -10,7 +10,7 @@ const port = 1618
 const privateMessages = [
 	'windowResize', 'windowActive', 'windowOpacityChange', 'windowSettingsChange', 
 	'windowClose', 'windowShow', 'playerPlay', 'playerNext', 'playerPrev', 
-	'playerProgress', 'playerVolumen'
+	'playerProgress', 'playerVolumen', 'childChangeUrl'
 ]
 
 let sockets = []
@@ -22,8 +22,8 @@ io
 		if(!sockets.length) {
 			socket.isMain = true
 		}
-		socket.emit('connected');
-
+		
+		socket.emit('connected')
 		sockets.push(socket)
 		
 		socket.on('*', (event) => {
@@ -42,15 +42,14 @@ io
 
 app
 	.get('/aurora-play.js', (req, res) => {
-		request('http://localhost:'+port+'/socket.io/socket.io.js', 
-			(errq, resq, bodyq) => {
-			const auroraPlayJS = 
-				fs.readFileSync('./app/libs/aurora-play.js').toString()
-			
-			res.send(
-				bodyq+auroraPlayJS
-			)
-		})
+		let package = req.headers['user-agent'].split(/\|/g);
+			package = package.length>1?'window.packageContent = '+package[1]+';':''
+		const auroraPlayJS =
+			fs.readFileSync(__dirname+'/aurora-play.js').toString()
+		const socketIOJS = 
+			fs.readFileSync(__dirname+'/socket.io.js').toString()
+		res.send(socketIOJS+package+auroraPlayJS)
+		
 	})
 
 server.listen(port)

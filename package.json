@@ -1,5 +1,5 @@
 {
-  "name": "aurora-play",
+  "name": "aurora-player",
   "version": "0.0.1",
   "description": "Aurora help you job and watch netflix",
   "main": "app/main.js",
@@ -14,7 +14,7 @@
     "electron-builder": "^11.2.4"
   },
   "build": {
-    "appId": "aurora-play",
+    "appId": "aurora-player",
     "files": "app/**/*",
     "extraFiles": "plugins/*",
     "directories": {

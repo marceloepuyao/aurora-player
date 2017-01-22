@@ -77,6 +77,9 @@ md-toolbar md-slider-container {
 	font-size: 30px;
 	line-height: 40px;
 }
+#videoPlayer > div > div {
+	display: inline-block;
+}
 
 .loadSection {
 	position: absolute;

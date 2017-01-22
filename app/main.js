@@ -1,5 +1,5 @@
 const electron = require('electron')
-const appIO = require('./modules/app.js')
+const appIO = require('./libs/app.js')
 const app = electron.app
 const nativeImage = electron.nativeImage
 const BrowserWindow = electron.BrowserWindow

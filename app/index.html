@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="aurora">
 	<head>
-		<title>Aurora play</title>
+		<title>Aurora player</title>
 		<link 
 			rel="stylesheet" 
 			type="text/css" 
@@ -91,28 +91,38 @@
 		></div>
 		<div
 			id="videoPlayer"
-		>
-			<i class="material-icons">play_arrow</i>
-			<md-slider 
-				flex 
-				min="0" 
-				max="{{g.player.limit}}" 
-				ng-model="g.player.current" 
-				aria-label="gray"
-			></md-slider>
-			<!--<i class="material-icons">pause</i>
-			<i class="material-icons">fullscreen</i>
-			<i class="material-icons">fullscreen_exit</i>
-			<i class="material-icons">volume_down</i>
-			<i class="material-icons">volume_mute</i>
-			<i class="material-icons">volume_off</i>
-			<i class="material-icons">volume_up</i>
-			<i class="material-icons">skip_previous</i>
-			<i class="material-icons">skip_next</i>-->
+			ng-show="g.player.element.show"
+		>	<div
+				class="pull-left"
+			>
+				<div
+					ng-repeat="item in g.player.element.left"
+				>
+					<i
+						class="material-icons"
+						ng-if="g.player.isSimpleItem(item)"
+						ng-click="g.player.emit(item)"
+					>{{item}}</i>
+				</div>
+			</div>
+			<div
+				class="pull-right"
+			>
+				<div
+					ng-repeat="item in g.player.element.right"
+				>
+					<i
+						class="material-icons"
+						ng-if="g.player.isSimpleItem(item)"
+						ng-click="g.player.emit(item)"
+					>{{item}}</i>
+				</div>
+			</div>
 		</div>
 		
 		<script type="text/javascript">
 			window.fs = require('fs');
+			window.request = require('request');
 			window.path = require('path');
 			window.electron = require('electron');
 			window.nativeImage = window.electron.nativeImage;
@@ -155,37 +165,45 @@
 
 		<script 
 			type="text/javascript"
-			src="./libs/app.aurora.js"
+			src="./modules/app.aurora.js"
 		></script>
 		<script 
 			type="text/javascript"
-			src="./libs/app.routes.js"
-		></script>
-
-		<script 
-			type="text/javascript"
-			src="./libs/controllers/home.controller.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./libs/controllers/general.controller.js"
+			src="./modules/app.routes.js"
 		></script>
 
 		<script 
 			type="text/javascript"
-			src="./libs/services/service.general.js"
+			src="./modules/controllers/controller.home.js"
 		></script>
 		<script 
 			type="text/javascript"
-			src="./libs/services/service.window.js"
+			src="./modules/controllers/controller.general.js"
+		></script>
+
+		<script 
+			type="text/javascript"
+			src="./modules/services/service.general.js"
 		></script>
 		<script 
 			type="text/javascript"
-			src="./libs/services/service.player.js"
+			src="./modules/services/service.window.js"
 		></script>
 		<script 
 			type="text/javascript"
-			src="./libs/services/service.channel.js"
+			src="./modules/services/service.player.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./modules/services/service.channel.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./modules/directives/directive.channel.js"
+		></script>
+		<script 
+			type="text/javascript"
+			src="./modules/directives/directive.channel-child.js"
 		></script>
 	</body>
 </html>

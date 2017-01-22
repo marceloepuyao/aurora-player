@@ -17,6 +17,7 @@
 		self.active = true;
 		self.activate = activateWindow;
 		self.close = closeWindow;
+		self.userAgent = navigator.userAgent;
 		
 		$interval(verifyUserInactivity, 4000);
 
