@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title></title>
-	</head>
+	<head></head>
 	<body>
 		<script 
 			type="text/javascript" 
 			src="http://localhost:1618/aurora-play.js"
 		></script>
 		<script type="text/javascript">
-			var netflixChild = {
+			var child = new auroraPlayer.child({
 				name: 'netflix',
 				main: 'https://www.netflix.com',
 				active: true
-			};
-			var player = {
-				show: true,
+			});
+			var player = new auroraPlayer.player({
+				show: false,
 				progress: {
 					show: true,
 					current: 0,
@@ -23,40 +21,34 @@
 				},
 				left: ['pause', 'volume_up'],
 				right: ['fullscreen']
-			};
+			});
 
-			auroraPlay.emit('addChild', netflixChild);
-			
-			auroraPlay.on('childChangeUrl', function(data) {
-				if(data.name === netflixChild.name) {
-					var url = data.url;
+			child.onChangeUrl(function(data) {
+				var url = data.url;
 					
-					if(/\/watch\/[0-9]+/.test(url)) {
-						auroraPlay.emit('execJSChild', {
-							name: netflixChild.name,
-							script: 'var __interval = setInterval(function() { var player = document.querySelector(".player-controls-wrapper"); if(player) { player.parentNode.removeChild(player); clearInterval(__interval); } console.log("interval"); }, 500);',
-							afterLoad: true
-						});
+				if(/\/watch\/[0-9]+/.test(url)) {
+					child.executeJavascript({
+						script: 'var __interval = setInterval(function() { var player = document.querySelector(".player-controls-wrapper"); if(player) { player.parentNode.removeChild(player); clearInterval(__interval); } console.log("interval"); }, 500);',
+						afterLoad: true
+					});
 						
-						auroraPlay.emit('player', player);
-					}
+					player.config.show = true;
+					player.update();
 				}
 			});
 
-			auroraPlay.on('playerPlay', function(state) {
+			player.onPlayStateChange(function(state) {
 				if(state) {
-					player.left[0] = 'pause';
-					auroraPlay.emit('player', player);
-					auroraPlay.emit('execJSChild', {
-						name: netflixChild.name,
+					player.config.left[0] = 'pause';
+					player.update();
+					child.executeJavascript({
 						script: 'document.querySelector("video").play();',
 						afterLoad: true
 					});
 				} else {
-					player.left[0] = 'play_arrow';
-					auroraPlay.emit('player', player);
-					auroraPlay.emit('execJSChild', {
-						name: netflixChild.name,
+					player.config.left[0] = 'play_arrow';
+					player.update();
+					child.executeJavascript({
 						script: 'document.querySelector("video").pause();',
 						afterLoad: true
 					});

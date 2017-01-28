@@ -29,15 +29,15 @@
 		function emitDefaultEvent(item) {
 			switch(item) {
 				case 'play_arrow':
-					auroraPlay.emit('playerPlay', true);
+					auroraPlayer.emit('playerPlay', true);
 				break;
 				case 'pause':
-					auroraPlay.emit('playerPlay', false);
+					auroraPlayer.emit('playerPlay', false);
 				break;
 			}
 		}
 
-		auroraPlay.on('player', function(player) {
+		auroraPlayer.on('player', function(player) {
 			$rootScope.$apply(function() {
 				self.element = player;
 			});

@@ -41,7 +41,7 @@
 			webview[0].addEventListener('did-navigate', webviewChangeUrl);
 			webview[0].addEventListener('did-navigate-in-page', webviewChangeUrl);
 
-			auroraPlay.on('execJSChild', function(data) {
+			auroraPlayer.on('execJSChild', function(data) {
 				if(data.name === child.name) {
 					if(data.afterLoad && !loadPage) {
 						execQueue.push(data);
@@ -52,7 +52,7 @@
 			});
 
 			function webviewChangeUrl(e) {
-				auroraPlay.emit('childChangeUrl', {
+				auroraPlayer.emit('childChangeUrl', {
 					name: child.name,
 					url: e.url
 				});

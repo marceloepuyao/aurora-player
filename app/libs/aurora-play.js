@@ -16,12 +16,12 @@
 		})
 	});
 
-	function AuroraPlay(packageData) {
+	function AuroraPlayer(packageData) {
 		this.on = _on;
 		this.emit = _emit;
-
+		this.child = ChildAuroraPlayer;
 	}
-	window.auroraPlay = new AuroraPlay((window.packageContent?window.packageContent.channelName:undefined));
+	window.auroraPlayer = new AuroraPlayer((window.packageContent?window.packageContent.channelName:undefined));
 
 	function _on(events, callback) {
 		events
