@@ -86,7 +86,7 @@
 			return $sce.trustAsResourceUrl(url);
 		}
 
-		auroraPlayer.on('addChild', function(child) {
+		/*auroraPlayer.on('addChild', function(child) {
 			$rootScope.$apply(function() {
 				if(self.active && child) {
 					if(child.active) {
@@ -97,6 +97,6 @@
 					self.active.children[child.name] = child;
 				}
 			});
-		});
+		});*/
 	}
 })();

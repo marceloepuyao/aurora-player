@@ -26,7 +26,7 @@
 			if(currentTime-lastMove >= 4000 && self.active) {
 				self.active = false;
 				self.panelOpacity = false;
-				auroraPlayer.emit('windowActive', false);
+				//auroraPlayer.emit('windowActive', false);
 			}
 		}
 
@@ -34,12 +34,12 @@
 			lastMove = Number(new Date());
 			if(!self.active) {
 				self.active = true;
-				auroraPlayer.emit('windowActive', true);
+				//auroraPlayer.emit('windowActive', true);
 			}
 		}
 
 		function closeWindow() {
-			auroraPlayer.emit('windowClose');
+			//auroraPlayer.emit('windowClose');
 			var currentWindow = require('electron').remote.getCurrentWindow();
 			currentWindow.close();
 		}

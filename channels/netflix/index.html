@@ -4,7 +4,7 @@
 	<body>
 		<script 
 			type="text/javascript" 
-			src="http://localhost:1618/aurora-play.js"
+			src="http://localhost:1618/aurora-player.js"
 		></script>
 		<script type="text/javascript">
 			var child = new auroraPlayer.child({
@@ -32,21 +32,21 @@
 						afterLoad: true
 					});
 						
-					player.config.show = true;
+					player.settings.show = true;
 					player.update();
 				}
 			});
 
 			player.onPlayStateChange(function(state) {
 				if(state) {
-					player.config.left[0] = 'pause';
+					player.settings.left[0] = 'pause';
 					player.update();
 					child.executeJavascript({
 						script: 'document.querySelector("video").play();',
 						afterLoad: true
 					});
 				} else {
-					player.config.left[0] = 'play_arrow';
+					player.settings.left[0] = 'play_arrow';
 					player.update();
 					child.executeJavascript({
 						script: 'document.querySelector("video").pause();',

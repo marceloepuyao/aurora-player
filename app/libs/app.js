@@ -41,11 +41,11 @@ io
 	});
 
 app
-	.get('/aurora-play.js', (req, res) => {
+	.get('/aurora-player.js', (req, res) => {
 		let package = req.headers['user-agent'].split(/\|/g);
 			package = package.length>1?'window.packageContent = '+package[1]+';':''
 		const auroraPlayerJS =
-			fs.readFileSync(__dirname+'/aurora-play.js').toString()
+			fs.readFileSync(__dirname+'/aurora-player.js').toString()
 		const socketIOJS = 
 			fs.readFileSync(__dirname+'/socket.io.js').toString()
 		res.send(socketIOJS+package+auroraPlayerJS)

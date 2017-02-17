@@ -29,18 +29,18 @@
 		function emitDefaultEvent(item) {
 			switch(item) {
 				case 'play_arrow':
-					auroraPlayer.emit('playerPlay', true);
+					//auroraPlayer.emit('playerPlay', true);
 				break;
 				case 'pause':
-					auroraPlayer.emit('playerPlay', false);
+					//auroraPlayer.emit('playerPlay', false);
 				break;
 			}
 		}
 
-		auroraPlayer.on('player', function(player) {
+		/*auroraPlayer.on('player', function(player) {
 			$rootScope.$apply(function() {
 				self.element = player;
 			});
-		});
+		});*/
 	}
 })();
