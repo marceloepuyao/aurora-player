@@ -10,6 +10,9 @@
 
 	function AuroraPlayer(packageData) {
 		console.log(packageData);
+		if(packageData) {
+			
+		}
 	}
 	window.auroraPlayer = new AuroraPlayer((window.packageContent?window.packageContent.channelName:undefined));
 
