@@ -1,0 +1,9 @@
+<div id="pageView" ng-controller="pageView as PV">
+	<webview
+		src="{{PV.pageUrl}}"
+		plugins="on"
+	></webview>
+	<div class="loadSection">
+		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
+</div>

@@ -12,11 +12,14 @@
 		$urlRouterProvider.otherwise('/');
 
 		$stateProvider
-			.state('home', {
+			.state('pageView', {
 				url: '/',
 				views: {
+					header: {
+						templateUrl: './views/header/header.html'
+					},
 					main: {
-						templateUrl: './views/home/main.html',
+						templateUrl: './views/page-view/main.html',
 					}
 				}
 			});
