@@ -5,13 +5,11 @@
 		.module('aurora')
 		.controller('general', generalControllerFunction);
 
-	generalControllerFunction.$inject = ['generalService'];
+	generalControllerFunction.$inject = ['windowService'];
 
-	function generalControllerFunction(generalService) {
+	function generalControllerFunction(windowService) {
 		var g = this;
 
-		g.window = generalService.window;
-		g.channel = generalService.channel;
-		g.player = generalService.player;
+		g.window = windowService;
 	}
 })();

@@ -2,82 +2,55 @@
 <html ng-app="aurora">
 	<head>
 		<title>Aurora player</title>
-		<link 
-			rel="stylesheet" 
-			type="text/css" 
-			href="./css/style.css" 
-		/>
-		<link 
-			rel="stylesheet" 
-			type="text/css" 
-			href="./bower_components/angular-material/angular-material.min.css"
-		/>
-		<link 
-			rel="stylesheet" 
-			type="text/css" 
-			href="./css/material-icons.css"
-		/>
-		<link 
-			rel="stylesheet" 
-			type="text/css" 
-			href="./bower_components/bootstrap/dist/css/bootstrap.min.css" 
-		/>
-		<meta 
-			name="viewport" 
-			content="width=device-width, initial-scale=1, 
-				maximum-scale=1, user-scalable=no" 
-		/>
+
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+		<!--<link rel="stylesheet" type="text/css" href="./bower_components/angular-material/angular-material.min.css" />-->
+		<link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
+		<link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 	</head>
-	<body 
+	<body
 		ng-controller="general as g"
 		ng-mousemove="g.window.activate()"
 	>
-		<md-toolbar 
+		<md-toolbar
 			class="md-hue-2"
-			ng-style="{opacity: g.window.active?'1':'0'}" 
+			ng-style="{opacity: g.window.active?'1':'0'}"
 		>
 			<div class="md-toolbar-tools">
-				<a 
-					ui-sref="home"
-					ng-if="g.channel.active"
-					ng-click="g.channel.active = undefined;"
-				>
-					<md-button 
-						class="md-icon-button" 
-						aria-label="Back"
-					>
-						<i class="material-icons">arrow_back</i>
-					</md-button>
-				</a>
+				<md-input-container md-no-float class="md-block">
+					<input ng-model="g.window.url" type="text" placeholder="URL" />
+				</md-input-container>
 				<span flex></span>
-				<md-button 
-					class="md-icon-button" 
-					aria-label="More" 
+				<md-button
+					class="md-icon-button"
+					aria-label="More"
 					ng-click="
-						g.window.panelOpacityControl = 
+						g.window.panelOpacityControl =
 							g.window.panelOpacityControl?false:true;
 					"
 				>
 					<i class="material-icons">opacity</i>
 				</md-button>
-				<md-button 
-					class="md-icon-button" 
-					aria-label="More" 
+				<md-button
+					class="md-icon-button"
+					aria-label="More"
 					ng-click="g.window.close()"
 				>
 					<i class="material-icons">close</i>
 				</md-button>
-				<md-slider-container 
-					flex 
+				<md-slider-container
+					flex
 					ng-show="g.window.panelOpacityControl && g.window.active"
 				>
-					<md-slider 
-						md-discrete 
-						ng-model="g.window.opacity" 
+					<md-slider
+						md-discrete
+						ng-model="g.window.opacity"
 						aria-label="Opacity"
-						min="15" 
-						max="100" 
-						step="1" 
+						min="15"
+						max="100"
+						step="1"
 						class="md-primary"
 						md-vertical
 					></md-slider>
@@ -85,125 +58,38 @@
 				</md-slider-container>
 			</div>
 		</md-toolbar>
-		<div 
-			ui-view="main" 
+		<div
+			ui-view="main"
 			ng-style="{opacity: g.window.opacity/100}"
 		></div>
-		<div
-			id="videoPlayer"
-			ng-show="g.player.element.show"
-		>	<div
-				class="pull-left"
-			>
-				<div
-					ng-repeat="item in g.player.element.left"
-				>
-					<i
-						class="material-icons"
-						ng-if="g.player.isSimpleItem(item)"
-						ng-click="g.player.emit(item)"
-					>{{item}}</i>
-				</div>
-			</div>
-			<div
-				class="pull-right"
-			>
-				<div
-					ng-repeat="item in g.player.element.right"
-				>
-					<i
-						class="material-icons"
-						ng-if="g.player.isSimpleItem(item)"
-						ng-click="g.player.emit(item)"
-					>{{item}}</i>
-				</div>
-			</div>
-		</div>
-		
+
 		<script type="text/javascript">
-			window.fs = require('fs');
+			/*window.fs = require('fs');
 			window.request = require('request');
 			window.path = require('path');
 			window.electron = require('electron');
-			window.nativeImage = window.electron.nativeImage;
+			window.nativeImage = window.electron.nativeImage;*/
 		</script>
 		<script type="text/javascript">
 			if (typeof module === 'object') {window.module = module; module = undefined;}
 		</script>
-		<script 
-			type="text/javascript"
-			src="./bower_components/jquery/dist/jquery.min.js"
-		></script>
+		<script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript">
 			if (window.module) module = window.module;
 		</script>
 
-		<script 
-			type="text/javascript"
-			src="http://localhost:1618/aurora-player.js"
-		></script>
-		<script 
-			type="text/javascript" 
-			src="./bower_components/angular/angular.min.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./bower_components/angular-aria/angular-aria.min.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./bower_components/angular-animate/angular-animate.min.js"
-		></script>
-		<script 
-			type="text/javascript" 
-			src="./bower_components/angular-material/angular-material.min.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"
-		></script>
+		<script type="text/javascript" src="./bower_components/angular/angular.min.js"></script>
+		<!--<script type="text/javascript" src="./bower_components/angular-aria/angular-aria.min.js"></script>
+		<script type="text/javascript" src="./bower_components/angular-animate/angular-animate.min.js"></script>
+		<script type="text/javascript" src="./bower_components/angular-material/angular-material.min.js"></script>-->
+		<script type="text/javascript" src="./bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
-		<script 
-			type="text/javascript"
-			src="./modules/app.aurora.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/app.routes.js"
-		></script>
+		<script type="text/javascript" src="./modules/app.aurora.js"></script>
+		<script type="text/javascript" src="./modules/app.routes.js"></script>
 
-		<script 
-			type="text/javascript"
-			src="./modules/controllers/controller.home.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/controllers/controller.general.js"
-		></script>
+		<script type="text/javascript" src="./modules/controllers/controller.home.js"></script>
+		<script type="text/javascript" src="./modules/controllers/controller.general.js"></script>
 
-		<script 
-			type="text/javascript"
-			src="./modules/services/service.general.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/services/service.window.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/services/service.player.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/services/service.channel.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/directives/directive.channel.js"
-		></script>
-		<script 
-			type="text/javascript"
-			src="./modules/directives/directive.channel-child.js"
-		></script>
+		<script type="text/javascript" src="./modules/services/service.window.js"></script>
 	</body>
 </html>

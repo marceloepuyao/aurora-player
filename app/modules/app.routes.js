@@ -19,14 +19,6 @@
 						templateUrl: './views/home/main.html',
 					}
 				}
-			})
-			.state('channel', {
-				url: '/channel/:name',
-				views: {
-					main: {
-						templateUrl: './views/channel/main.html'
-					}
-				}
 			});
 	}
 
@@ -34,7 +26,7 @@
 
 	function moduleRun($rootScope, $state) {
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-			
+
 		});
 	}
 })();

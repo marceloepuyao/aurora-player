@@ -17,8 +17,8 @@
 		self.active = true;
 		self.activate = activateWindow;
 		self.close = closeWindow;
-		self.userAgent = navigator.userAgent;
-		
+		self.url = 'http://www.google.com/';
+
 		$interval(verifyUserInactivity, 4000);
 
 		function verifyUserInactivity() {

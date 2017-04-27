@@ -1,5 +1,4 @@
 const electron = require('electron')
-const appIO = require('./libs/app.js')
 const app = electron.app
 const nativeImage = electron.nativeImage
 const BrowserWindow = electron.BrowserWindow
@@ -14,7 +13,7 @@ function createWindow () {
 	BrowserWindow.addDevToolsExtension('./extensions/angular-batarang');
 
 	mainWindow = new BrowserWindow({
-		width: 800, 
+		width: 800,
 		height: 600,
 		//width: 500,
 		//height: 300,
