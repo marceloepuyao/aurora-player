@@ -49,6 +49,7 @@
 		function crop() {
 			self.showCropOptions = true;
 			cropCoors = undefined;
+			cropHandler.updateCrop()
 		}
 
 		function closeCrop() {
@@ -61,5 +62,9 @@
 			cropHandler.release();
 			console.log(cropCoors);
 		}
+
+		$(window).resize(function() {
+			cropHandler.updateCrop();
+		});
 	}
 })();
