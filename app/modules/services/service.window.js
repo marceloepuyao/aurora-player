@@ -28,6 +28,7 @@
 		self.closeCrop = closeCrop;
 		self.cropBrowser = cropBrowser;
 		self.clearCrop = clearCrop;
+		self.cropCoors = window.cropCoors = {};
 
 		$interval(verifyUserInactivity, 4000);
 
@@ -53,12 +54,7 @@
 
 		function crop() {
 			self.showCropOptions = true;
-			cropCoors = undefined;
 			cropHandler.updateCrop();
-			$('#pageView, .jcrop-holder').css({
-				width: '100%',
-				height: '100%'
-			});
 		}
 
 		function closeCrop() {
@@ -83,11 +79,9 @@
 		}
 
 		$(window).resize(function() {
-			cropHandler.updateCrop();
-			$('#pageView, .jcrop-holder').css({
-				width: '100%',
-				height: '100%'
-			});
+			if(!self.cropped) {
+				cropHandler.updateCrop();
+			}
 		});
 	}
 })();
