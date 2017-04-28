@@ -23,10 +23,14 @@ header {
 }
 header .header-right {
 	float: right;
+}
+header .header-right button {
 	-webkit-app-region: no-drag;
 }
 header .header-left {
 	float: left;
+}
+header .header-left button {
 	-webkit-app-region: no-drag;
 }
 header > input {

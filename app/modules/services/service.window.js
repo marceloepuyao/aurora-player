@@ -18,6 +18,7 @@
 		self.activate = activateWindow;
 		self.close = closeWindow;
 		self.url = 'http://www.youtube.com/';
+		self.auxUrl = self.url;
 
 		$interval(verifyUserInactivity, 4000);
 

@@ -16,9 +16,9 @@
                 GV.window.panelOpacity =
                     GV.window.panelOpacity?false:true;
             "
+            title="Opacity"
         >
             <i class="material-icons">opacity</i>
-            <md-tooltip md-direction="bottom">Opacity</md-tooltip>
         </md-button>
         <md-slider-container
             flex
@@ -37,23 +37,23 @@
             </md-slider>
         </md-slider-container>
     </div>
-    <input ng-model="GV.window.url" type="text" placeholder="URL" />
+    <input ng-model="GV.window.auxUrl" type="text" placeholder="URL" url-input />
     <div class="header-right">
         <md-button
             class="md-icon-button"
             aria-label="crop"
             ng-click="GV.window.crop()"
+            title="Crop screen"
         >
             <i class="material-icons">crop</i>
-            <md-tooltip md-direction="bottom">Crop screen</md-tooltip>
         </md-button>
         <md-button
             class="md-icon-button"
             aria-label="close"
             ng-click="GV.window.close()"
+            title="Close window"
         >
             <i class="material-icons">close</i>
-            <md-tooltip md-direction="bottom">Close window</md-tooltip>
         </md-button>
     </div>
 </header>
