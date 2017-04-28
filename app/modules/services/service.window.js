@@ -10,6 +10,10 @@
 	function windowServiceFunction($interval) {
 		var self = this;
 		var lastMove = Number(new Date());
+		var sizesCropped = {
+			height: 0,
+			width: 0
+		};
 
 		self.opacity = 100;
 		self.panelOpacity = false;
@@ -23,6 +27,7 @@
 		self.showCropOptions = false;
 		self.closeCrop = closeCrop;
 		self.cropBrowser = cropBrowser;
+		self.clearCrop = clearCrop;
 
 		$interval(verifyUserInactivity, 4000);
 
@@ -49,7 +54,11 @@
 		function crop() {
 			self.showCropOptions = true;
 			cropCoors = undefined;
-			cropHandler.updateCrop()
+			cropHandler.updateCrop();
+			$('#pageView, .jcrop-holder').css({
+				width: '100%',
+				height: '100%'
+			});
 		}
 
 		function closeCrop() {
@@ -58,13 +67,27 @@
 		}
 
 		function cropBrowser() {
+			var coors = cropCoors;
 			self.showCropOptions = false;
+			self.cropped = true;
 			cropHandler.release();
-			console.log(cropCoors);
+			require('electron').remote.getCurrentWindow().setContentSize(coors.w, coors.h+$('header').height(), true);
+			sizesCropped.width = $(window).width();
+			sizesCropped.height = $(window).height();
+			console.log(coors);
+		}
+
+		function clearCrop() {
+			self.cropped = false;
+			require('electron').remote.getCurrentWindow().setContentSize(sizesCropped.width, sizesCropped.height, true);
 		}
 
 		$(window).resize(function() {
 			cropHandler.updateCrop();
+			$('#pageView, .jcrop-holder').css({
+				width: '100%',
+				height: '100%'
+			});
 		});
 	}
 })();

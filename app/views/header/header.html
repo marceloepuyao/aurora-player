@@ -44,8 +44,20 @@
             aria-label="crop"
             ng-click="GV.window.crop()"
             title="Crop screen"
+            ng-disabled="GV.window.showCropOptions"
+            ng-if="!GV.window.cropped"
         >
             <i class="material-icons">crop</i>
+        </md-button>
+        <md-button
+            class="md-icon-button"
+            aria-label="crop"
+            ng-click="GV.window.clearCrop()"
+            title="Clear crop"
+            ng-disabled="GV.window.showCropOptions"
+            ng-if="GV.window.cropped"
+        >
+            <i class="material-icons">crop_original</i>
         </md-button>
         <md-button
             class="md-icon-button"

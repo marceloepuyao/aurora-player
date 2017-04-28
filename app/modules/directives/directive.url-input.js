@@ -77,9 +77,11 @@
                 resizeUrlInput();
 
                 function resizeUrlInput() {
-                    $(element[0]).css({
-                        width: ($(window).width()-($('header .header-left').width()+$('header .header-right').width()+35))+'px'
-                    });
+                    setTimeout(function() {
+                        $(element[0]).css({
+                            width: ($(window).width()-($('header .header-left').width()+$('header .header-right').width()+35))+'px'
+                        });
+                    }, 1);
                 }
             }
         };
