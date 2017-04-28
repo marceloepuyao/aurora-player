@@ -7,4 +7,15 @@
 	<div class="loadSection">
 		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 	</div>
+	<script type="text/javascript">
+		$('#pageView').Jcrop({
+			onSelect: function(coords) {
+				window.cropCoors = coords;
+			}
+		}, function() {
+			window.cropHandler = this;
+			window.cropCoors = undefined;
+			this.release();
+		});
+	</script>
 </div>

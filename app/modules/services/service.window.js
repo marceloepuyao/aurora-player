@@ -9,7 +9,6 @@
 
 	function windowServiceFunction($interval) {
 		var self = this;
-
 		var lastMove = Number(new Date());
 
 		self.opacity = 100;
@@ -19,6 +18,11 @@
 		self.close = closeWindow;
 		self.url = 'http://www.youtube.com/';
 		self.auxUrl = self.url;
+		self.crop = crop;
+		self.cropped = false;
+		self.showCropOptions = false;
+		self.closeCrop = closeCrop;
+		self.cropBrowser = cropBrowser;
 
 		$interval(verifyUserInactivity, 4000);
 
@@ -27,7 +31,6 @@
 			if(currentTime-lastMove >= 4000 && self.active) {
 				self.active = false;
 				self.panelOpacity = false;
-				//auroraPlayer.emit('windowActive', false);
 			}
 		}
 
@@ -35,14 +38,28 @@
 			lastMove = Number(new Date());
 			if(!self.active) {
 				self.active = true;
-				//auroraPlayer.emit('windowActive', true);
 			}
 		}
 
 		function closeWindow() {
-			//auroraPlayer.emit('windowClose');
 			var currentWindow = require('electron').remote.getCurrentWindow();
 			currentWindow.close();
+		}
+
+		function crop() {
+			self.showCropOptions = true;
+			cropCoors = undefined;
+		}
+
+		function closeCrop() {
+			self.showCropOptions = false;
+			cropHandler.release();
+		}
+
+		function cropBrowser() {
+			self.showCropOptions = false;
+			cropHandler.release();
+			console.log(cropCoors);
 		}
 	}
 })();

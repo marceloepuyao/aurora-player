@@ -37,7 +37,7 @@
             </md-slider>
         </md-slider-container>
     </div>
-    <input ng-model="GV.window.auxUrl" type="text" placeholder="URL" url-input />
+    <input ng-model="GV.window.auxUrl" type="text" placeholder="URL" url-input  ng-show="!GV.window.cropped"/>
     <div class="header-right">
         <md-button
             class="md-icon-button"

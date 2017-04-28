@@ -3,10 +3,10 @@
 	<head>
 		<title>Aurora player</title>
 
-		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 		<link rel="stylesheet" type="text/css" href="./bower_components/angular-material/angular-material.min.css" />
 		<link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
-		<!--<link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" />-->
+		<link rel="stylesheet" type="text/css" href="./css/Jcrop.min.css" />
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 	</head>
@@ -15,19 +15,17 @@
 		ng-mousemove="GV.window.activate()"
 	>
 		<div ui-view="header"></div>
-		<div ui-view="main" ng-style="{opacity: GV.window.opacity/100}"></div>
+		<div ui-view="main" ng-style="{opacity: GV.window.opacity/100}" id="pageViewContent" ng-class="{disableCrop: !GV.window.showCropOptions}"></div>
+		<div ui-view="cropOptions" ng-show="GV.window.showCropOptions" id="cropOptions"></div>
 
 		<script type="text/javascript">
-			/*window.fs = require('fs');
-			window.request = require('request');
-			window.path = require('path');
-			window.electron = require('electron');
-			window.nativeImage = window.electron.nativeImage;*/
+			//Node modules required
 		</script>
 		<script type="text/javascript">
 			if (typeof module === 'object') {window.module = module; module = undefined;}
 		</script>
 		<script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/Jcrop.min.js"></script>
 		<script type="text/javascript">
 			if (window.module) module = window.module;
 		</script>

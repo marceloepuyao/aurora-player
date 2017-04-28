@@ -19,7 +19,10 @@
 						templateUrl: './views/header/header.html'
 					},
 					main: {
-						templateUrl: './views/page-view/main.html',
+						templateUrl: './views/page-view/main.html'
+					},
+					cropOptions: {
+						templateUrl: './views/crop-options/crop-options.html'
 					}
 				}
 			});
