@@ -48,11 +48,11 @@
                       "$", "i"
                 );
 
-                $(element).focus(function(e) {
+                $(element[0]).focus(function(e) {
                     $(this).select();
                 });
 
-                $(element).keyup(function(e) {
+                $(element[0]).keyup(function(e) {
                     var code = e.keyCode;
                     if(code === 13) {
                         e.preventDefault();
@@ -72,6 +72,15 @@
                         windowService.activate();
                     });
                 });
+
+                $(window).resize(resizeUrlInput);
+                resizeUrlInput();
+
+                function resizeUrlInput() {
+                    $(element[0]).css({
+                        width: ($(window).width()-($('header .header-left').width()+$('header .header-right').width()+35))+'px'
+                    });
+                }
             }
         };
     }
