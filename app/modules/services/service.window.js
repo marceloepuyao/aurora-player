@@ -13,11 +13,11 @@
 		var lastMove = Number(new Date());
 
 		self.opacity = 100;
-		self.panelOpacityControl = false;
+		self.panelOpacity = false;
 		self.active = true;
 		self.activate = activateWindow;
 		self.close = closeWindow;
-		self.url = 'http://www.google.com/';
+		self.url = 'http://www.youtube.com/';
 
 		$interval(verifyUserInactivity, 4000);
 

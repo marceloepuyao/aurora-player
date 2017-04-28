@@ -1,7 +1,6 @@
 :focus {
 	outline: none;
 }
-
 body, html {
 	height: 100%;
 	width: 100%;
@@ -10,30 +9,6 @@ body, html {
 	background-color: rgba(0,0,0,0)!important;
 	overflow: hidden;
 }
-/*
-md-toolbar {
-	-webkit-transition: opacity .4s!important;
-	transition: opacity .4s!important;
-	-webkit-app-region: drag;
-	color: #ffffff!important;
-	background: #48bff7!important;
-}
-md-toolbar i {
-	font-size: 22px!important;
-}
-md-toolbar a {
-	color: #ffffff!important;
-	text-decoration: none!important;
-}
-md-toolbar button {
-	-webkit-app-region: no-drag;
-}
-md-toolbar md-slider-container {
-	position: absolute;
-	right: 65px;
-	top: 42px;
-	z-index: 10;
-}*/
 md-tooltip {
 	color: #fff!important;
 	background: rgb(128, 128, 128)!important;
@@ -43,6 +18,8 @@ header {
 	-webkit-app-region: drag;
 	background: rgb(236,236,236);
 	width: 100%;
+	-webkit-transition: opacity .4s!important;
+	transition: opacity .4s!important;
 }
 header .header-right {
 	float: right;
@@ -64,6 +41,13 @@ header > input {
 }
 header i {
 	color: #555;
+}
+
+header md-slider-container {
+	position: absolute;
+	left: 0px;
+	top: 35px;
+	z-index: 10;
 }
 
 #pageView, div[ui-view="main"] {

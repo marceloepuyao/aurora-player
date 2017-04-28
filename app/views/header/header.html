@@ -1,40 +1,41 @@
-<!--
-    <md-button
-        class="md-icon-button"
-        aria-label="More"
-        ng-click="
-            GV.window.panelOpacityControl =
-                GV.window.panelOpacityControl?false:true;
-        "
-    >
-        <i class="material-icons">opacity</i>
-    </md-button>
-    <md-slider-container
-        flex
-        ng-show="GV.window.panelOpacityControl && GV.window.active"
-    >
-        <md-slider
-            md-discrete
-            ng-model="GV.window.opacity"
-            aria-label="Opacity"
-            min="15"
-            max="100"
-            step="1"
-            class="md-primary"
-            md-vertical
-        ></md-slider>
-        </md-slider>
-    </md-slider-container>
--->
-<header>
+<header
+    ng-style="{opacity: GV.window.active?'1':'0'}"
+>
     <div class="header-left">
-        <md-button
+        <!--<md-button
             class="md-icon-button"
             aria-label="menu"
         >
             <i class="material-icons">more_vert</i>
             <md-tooltip md-direction="bottom">Menu</md-tooltip>
+        </md-button>-->
+        <md-button
+            class="md-icon-button"
+            aria-label="More"
+            ng-click="
+                GV.window.panelOpacity =
+                    GV.window.panelOpacity?false:true;
+            "
+        >
+            <i class="material-icons">opacity</i>
+            <md-tooltip md-direction="bottom">Opacity</md-tooltip>
         </md-button>
+        <md-slider-container
+            flex
+            ng-show="GV.window.panelOpacity && GV.window.active"
+        >
+            <md-slider
+                md-range
+                md-vertical
+                ng-model="GV.window.opacity"
+                aria-label="Opacity"
+                min="15"
+                max="100"
+                step="1"
+                class="md-primary"
+            ></md-slider>
+            </md-slider>
+        </md-slider-container>
     </div>
     <input ng-model="GV.window.url" type="text" placeholder="URL" />
     <div class="header-right">
