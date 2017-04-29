@@ -2,9 +2,7 @@
 	id="pageView"
 	ng-controller="pageView as PV"
 	ng-style="{
-		transform: PV.window.cropped?'translate(-'+PV.window.cropCoors.x+'px, -'+PV.window.cropCoors.y+'px)':'inherit',
-		width: PV.window.cropped?(PV.window.cropCoors.x+PV.window.cropCoors.w)+'px':'100%',
-		height: PV.window.cropped?(PV.window.cropCoors.y+PV.window.cropCoors.h)+'px':'100%'
+		transform: PV.window.cropped?'translate(-'+PV.window.cropCoors.x+'px, -'+PV.window.cropCoors.y+'px)':'inherit'
 	}"
 >
 	<webview

@@ -70,7 +70,6 @@
 			require('electron').remote.getCurrentWindow().setContentSize(coors.w, coors.h+$('header').height(), true);
 			sizesCropped.width = $(window).width();
 			sizesCropped.height = $(window).height();
-			console.log(coors);
 		}
 
 		function clearCrop() {
