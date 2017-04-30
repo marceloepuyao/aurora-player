@@ -94,6 +94,7 @@
 			});
 		}
 
+		var windowAutomaticResize = false;
 		$(window).resize(function() {
 			if(!self.cropped) {
 				cropHandler.updateCrop();
@@ -103,8 +104,6 @@
 
 				var newWidth = $(window).width();
 				var newHeight = $(window).height();
-
-				
 
 				if(originalWidth !== newWidth && originalHeight !== newHeight) {
 					var widthFactor = newWidth/originalWidth;
