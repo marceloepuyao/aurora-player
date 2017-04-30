@@ -72,11 +72,13 @@
 			require('electron').remote.getCurrentWindow().setContentSize(coors.w, coors.h+$('header').height(), true);
 			sizesCropped.width = $(window).width();
 			sizesCropped.height = $(window).height();
+			$('webview')[0].insertCSS('body{overflow:hidden}');
 		}
 
 		function clearCrop() {
 			self.cropped = false;
 			require('electron').remote.getCurrentWindow().setContentSize(sizesCropped.width, sizesCropped.height, true);
+			$('webview')[0].insertCSS('body{overflow:inherit}');
 		}
 
 		function smartCrop() {
