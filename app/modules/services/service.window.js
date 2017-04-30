@@ -77,6 +77,37 @@
 			require('electron').remote.getCurrentWindow().setContentSize(sizesCropped.width, sizesCropped.height, true);
 		}
 
+/*
+function rectangleSelect(x1, y1, x2, y2) {
+    var elements = [];
+    var body = document.querySelector('body');
+    var bigElement = {
+        element: undefined,
+        area: 0
+    };
+
+    for(var i = 0; i < body.children.length; i++) {
+        var element = body.children[i];
+        var x = element.offsetLeft;
+        var y = element.offsetTop;
+        var w = element.offsetWidth;
+        var h = element.offsetHeight;
+
+        if (
+            x >= x1 &&
+            y >= y1 &&
+            x + w <= x2 &&
+            y + h <= y2 &&
+            w*h > bigElement.area
+        ) {
+            bigElement.element = element;
+            bigElement.area = w*h;
+        }
+    }
+    return bigElement.element;
+}
+*/
+
 		$(window).resize(function() {
 			if(!self.cropped) {
 				cropHandler.updateCrop();
