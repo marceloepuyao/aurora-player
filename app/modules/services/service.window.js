@@ -97,6 +97,24 @@
 		$(window).resize(function() {
 			if(!self.cropped) {
 				cropHandler.updateCrop();
+			} else {
+				var originalWidth = sizesCropped.width;
+				var originalHeight = sizesCropped.height;
+
+				var newWidth = $(window).width();
+				var newHeight = $(window).height();
+
+				
+
+				if(originalWidth !== newWidth && originalHeight !== newHeight) {
+					var widthFactor = newWidth/originalWidth;
+					var heightFactor = newHeight/originalHeight;
+				} else if(originalWidth !== newWidth) {
+					var widthFactor = newWidth/originalWidth;
+				} else if(originalHeight !== newHeight) {
+					var heightFactor = newHeight/originalHeight;
+				}
+				console.log(originalWidth, originalHeight, newWidth, newHeight);
 			}
 		});
 	}
