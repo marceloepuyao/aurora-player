@@ -92,16 +92,24 @@ header md-slider-container {
 	z-index: 1000;
 }
 
-#cropOptions {
-	position: absolute;
-    z-index: 1001;
-    bottom: 0px;
-    right: 0px;
+#cropOptions md-fab-speed-dial {
+	z-index: 10001;
 }
-#cropOptions button {
+#cropOptions md-fab-speed-dial md-fab-trigger button {
 	background: rgb(54,205,234)!important;
     color: #fff!important;
 }
-#cropOptions button i {
+#cropOptions md-fab-speed-dial md-fab-trigger button i {
+	line-height: 56px;
+}
+#cropOptions md-fab-actions button {
+	background: #ccc!important;
+}
+#cropOptions md-fab-actions button i {
 	line-height: 40px;
+	color: #fff!important;
+}
+
+.md-panel-outer-wrapper {
+	z-index: 1000!important;
 }

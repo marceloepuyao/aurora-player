@@ -1,16 +1,51 @@
-<md-button
-    class="md-fab md-mini"
-    aria-label="done"
-    title="Select crop area"
-    ng-click="GV.window.cropBrowser()"
+<md-fab-speed-dial
+    md-direction="left"
+    md-open="ISOPEN"
+    class="md-scale md-fab-bottom-right"
+    ng-class="{ 'md-hover-full': demo.hover }"
+    ng-mouseenter="ISOPEN=true"
+    ng-mouseleave="ISOPEN=false"
+    ng-init="ISOPEN = false;"
 >
-    <i class="material-icons">done</i>
-</md-button>
-<md-button
-    class="md-fab md-mini"
-    aria-label="cancel"
-    title="Cancel crop"
-    ng-click="GV.window.closeCrop()"
->
-    <i class="material-icons">clear</i>
-</md-button>
+    <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn" ng-click="GV.window.closeCrop()">
+            <md-tooltip md-direction="top" md-visible="tooltipVisible">{{ISOPEN?'Cancel crop':'Menu'}}</md-tooltip>
+            <i class="material-icons">{{ISOPEN?'clear':'menu'}}</i>
+        </md-button>
+    </md-fab-trigger>
+
+    <md-fab-actions>
+        <div>
+            <md-button
+                aria-label="action"
+                class="md-fab md-raised md-mini"
+                ng-click="GV.window.cropBrowser()"
+            >
+                <md-tooltip
+                    md-direction="top"
+                    md-visible="tooltipVisible"
+                    md-autohide="false"
+                >
+                    Crop area
+                </md-tooltip>
+                <i class="material-icons">crop</i>
+            </md-button>
+        </div>
+        <div>
+            <md-button
+                aria-label="action"
+                class="md-fab md-raised md-mini"
+                ng-click="GV.window.smartCrop()"
+            >
+                <md-tooltip
+                    md-direction="top"
+                    md-visible="tooltipVisible"
+                    md-autohide="false"
+                >
+                    Smart crop area
+                </md-tooltip>
+                <i class="material-icons">image_aspect_ratio</i>
+            </md-button>
+        </div>
+    </md-fab-actions>
+</md-fab-speed-dial>

@@ -28,6 +28,7 @@
 		self.closeCrop = closeCrop;
 		self.cropBrowser = cropBrowser;
 		self.clearCrop = clearCrop;
+		self.smartCrop = smartCrop;
 		self.cropCoors = window.cropCoors = {};
 
 		$interval(verifyUserInactivity, 4000);
@@ -55,6 +56,7 @@
 		function crop() {
 			self.showCropOptions = true;
 			cropHandler.updateCrop();
+			cropHandler.setSelect([0, 0, 200, 200]);
 		}
 
 		function closeCrop() {
@@ -77,36 +79,18 @@
 			require('electron').remote.getCurrentWindow().setContentSize(sizesCropped.width, sizesCropped.height, true);
 		}
 
-/*
-function rectangleSelect(x1, y1, x2, y2) {
-    var elements = [];
-    var body = document.querySelector('body');
-    var bigElement = {
-        element: undefined,
-        area: 0
-    };
-
-    for(var i = 0; i < body.children.length; i++) {
-        var element = body.children[i];
-        var x = element.offsetLeft;
-        var y = element.offsetTop;
-        var w = element.offsetWidth;
-        var h = element.offsetHeight;
-
-        if (
-            x >= x1 &&
-            y >= y1 &&
-            x + w <= x2 &&
-            y + h <= y2 &&
-            w*h > bigElement.area
-        ) {
-            bigElement.element = element;
-            bigElement.area = w*h;
-        }
-    }
-    return bigElement.element;
-}
-*/
+		function smartCrop() {
+			var coors = cropCoors;
+			$('webview')[0].executeJavaScript(elementInArea+'('+coors.x+', '+coors.y+', '+coors.x2+', '+coors.y2+');', false, function(_coors) {
+				if(_coors) {
+					_coors.h = _coors.y2-_coors.y;
+					_coors.w = _coors.x2-_coors.x;
+					Object.assign(window.cropCoors, _coors);
+					cropHandler.animateTo([_coors.x, _coors.y, _coors.x2, _coors.y2]);
+					self.cropBrowser();
+				}
+			});
+		}
 
 		$(window).resize(function() {
 			if(!self.cropped) {
