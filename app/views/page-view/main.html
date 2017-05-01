@@ -2,7 +2,7 @@
 	id="pageView"
 	ng-controller="pageView as PV"
 	ng-style="{
-		transform: PV.window.cropped?'translate(-'+PV.window.cropCoors.x+'px, -'+PV.window.cropCoors.y+'px)':'inherit'
+		transform: PV.window.cropped?'translate(-'+(PV.window.cropCoors.x+PV.window.cropCoors.deltax)+'px, -'+(PV.window.cropCoors.y+PV.window.cropCoors.deltay)+'px)':'inherit'
 	}"
 >
 	<webview
@@ -16,7 +16,10 @@
 	<script type="text/javascript">
 		$('#pageView').Jcrop({
 			onSelect: function(coords) {
-				Object.assign(window.cropCoors, coords);
+				Object.assign(window.cropCoors, coords, {
+					deltax: 0,
+					deltay: 0
+				});
 			}
 		}, function() {
 			window.cropHandler = this;

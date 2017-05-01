@@ -5,15 +5,17 @@
 		.module('aurora')
 		.service('windowService', windowServiceFunction);
 
-	windowServiceFunction.$inject = ['$interval'];
+	windowServiceFunction.$inject = ['$interval', '$timeout'];
 
-	function windowServiceFunction($interval) {
+	function windowServiceFunction($interval, $timeout) {
 		var self = this;
 		var lastMove = Number(new Date());
 		var sizesCropped = {
 			height: 0,
 			width: 0
 		};
+		var win = require('electron').remote.getCurrentWindow();
+		var windowAutomaticResize = false;
 
 		self.opacity = 100;
 		self.panelOpacity = false;
@@ -49,8 +51,7 @@
 		}
 
 		function closeWindow() {
-			var currentWindow = require('electron').remote.getCurrentWindow();
-			currentWindow.close();
+			win.close();
 		}
 
 		function crop() {
@@ -69,7 +70,8 @@
 			self.showCropOptions = false;
 			self.cropped = true;
 			cropHandler.release();
-			require('electron').remote.getCurrentWindow().setContentSize(coors.w, coors.h+$('header').height(), true);
+			windowAutomaticResize = true;
+			win.setSize(coors.w, coors.h+$('header').height(), true);
 			sizesCropped.width = $(window).width();
 			sizesCropped.height = $(window).height();
 			$('webview')[0].insertCSS('body{overflow:hidden}');
@@ -77,8 +79,14 @@
 
 		function clearCrop() {
 			self.cropped = false;
-			require('electron').remote.getCurrentWindow().setContentSize(sizesCropped.width, sizesCropped.height, true);
+			windowAutomaticResize = true;
+			win.setSize(sizesCropped.width, sizesCropped.height, true);
 			$('webview')[0].insertCSS('body{overflow:inherit}');
+			$timeout(function() {
+				self.showCropOptions = true;
+				console.log(cropCoors);
+				cropHandler.setSelect([cropCoors.x, cropCoors.y, cropCoors.x2, cropCoors.y2]);
+			}, 1);
 		}
 
 		function smartCrop() {
@@ -90,15 +98,24 @@
 					Object.assign(window.cropCoors, _coors);
 					cropHandler.animateTo([_coors.x, _coors.y, _coors.x2, _coors.y2]);
 					self.cropBrowser();
+					$timeout(function() {
+						$('webview')[0].executeJavaScript(elementPositionCorrector+'('+_coors.ide+');', false, function(__coors) {
+							if(_coors.x !== __coors.x || _coors.y !== __coors.y) {
+								Object.assign(window.cropCoors, {
+									deltax: __coors.x-_coors.x,
+									deltay: __coors.y-_coors.y
+								});
+							}
+						});
+					}, 1);
 				}
 			});
 		}
 
-		var windowAutomaticResize = false;
 		$(window).resize(function() {
-			if(!self.cropped) {
+			if(!self.cropped && !windowAutomaticResize) {
 				cropHandler.updateCrop();
-			} else {
+			} else if(!windowAutomaticResize) {
 				var originalWidth = sizesCropped.width;
 				var originalHeight = sizesCropped.height;
 
@@ -108,13 +125,18 @@
 				if(originalWidth !== newWidth && originalHeight !== newHeight) {
 					var widthFactor = newWidth/originalWidth;
 					var heightFactor = newHeight/originalHeight;
+
+
 				} else if(originalWidth !== newWidth) {
 					var widthFactor = newWidth/originalWidth;
 				} else if(originalHeight !== newHeight) {
 					var heightFactor = newHeight/originalHeight;
 				}
 				console.log(originalWidth, originalHeight, newWidth, newHeight);
+			} else {
+				windowAutomaticResize = false;
 			}
+			self.activate();
 		});
 	}
 })();

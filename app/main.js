@@ -15,9 +15,9 @@ function createWindow () {
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
-		//width: 500,
-		//height: 300,
 		frame: false,
+		minWidth: 250,
+		minHeight: 200,
 		transparent: true,
 		icon: icon,
 		webPreferences: {
@@ -41,15 +41,15 @@ function createWindow () {
 }
 
 if(process.platform === 'darwin') {
-	app.commandLine.appendSwitch('widevine-cdm-path', './Contents/plugins/widevinecdmadapter.plugin')
+	app.commandLine.appendSwitch('widevine-cdm-path', path.join(__dirname, '../', 'Contents', 'plugins', 'widevinecdmadapter.plugin'))
 	app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
 } else if(process.platform === 'linux') {
-	app.commandLine.appendSwitch('widevine-cdm-path', './plugins/libwidevinecdmadapter.so')
+	app.commandLine.appendSwitch('widevine-cdm-path', path.join(__dirname, '../', 'plugins', 'libwidevinecdmadapter.so'))
 	app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
 	app.commandLine.appendSwitch('enable-transparent-visuals')
 	app.commandLine.appendSwitch('disable-gpu')
 } else if(/^win/.test(process.platform)) {
-	app.commandLine.appendSwitch('widevine-cdm-path', './plugins/widevinecdmadapter.dll')
+	app.commandLine.appendSwitch('widevine-cdm-path', path.join(__dirname, '../', 'plugins', 'widevinecdmadapter.dll'))
 	app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.903')
 }
 
