@@ -1,11 +1,8 @@
 {
   "name": "aurora-player",
   "version": "0.0.1",
-  "description": "ble",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Aurora help you job and watch something",
+  "main": "./main.js",
   "author": "Franciscofernando",
   "license": "ISC",
   "dependencies": {}

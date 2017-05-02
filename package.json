@@ -1,24 +1,16 @@
 {
   "name": "aurora-player",
   "version": "0.0.1",
-  "description": "Aurora help you job and watch netflix",
-  "main": "app/main.js",
+  "description": "Aurora help you job and watch something",
+  "main": "./app/main.js",
   "scripts": {
     "start": "electron .",
-    "build": "node_modules/.bin/build --windows"
+    "build:windows": "node ./builders/windows.js"
   },
   "author": "Franciscofernando",
   "license": "ISC",
-  "devDependencies": {
-    "electron": "^1.4.14",
-    "electron-builder": "^11.2.4"
-  },
-  "build": {
-    "appId": "aurora-player",
-    "files": "app/**/*",
-    "extraFiles": "plugins/*",
-    "directories": {
-      "output": "build"
-    }
+  "dependencies": {
+    "electron": "^1.6.6",
+    "electron-packager": "^8.6.0"
   }
 }
