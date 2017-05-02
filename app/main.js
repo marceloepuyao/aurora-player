@@ -7,10 +7,10 @@ const path = require('path')
 const url = require('url')
 
 let mainWindow
-let icon = nativeImage.createFromPath(path.join(__dirname, 'img', 'icons', '32x32.png'))
+let icon = nativeImage.createFromPath(path.join(__dirname, 'img', 'icons', 'icon.png'))
 
 function createWindow () {
-	BrowserWindow.addDevToolsExtension('./extensions/angular-batarang');
+	//BrowserWindow.addDevToolsExtension('./extensions/angular-batarang');
 
 	mainWindow = new BrowserWindow({
 		width: 800,
@@ -31,7 +31,7 @@ function createWindow () {
 		slashes: true
 	}))
 
-	mainWindow.webContents.openDevTools()
+	//mainWindow.webContents.openDevTools()
 
 	mainWindow.on('closed', function () {
 		mainWindow = null
