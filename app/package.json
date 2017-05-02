@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "description": "Aurora help you job and watch something",
   "main": "./main.js",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/bower install"  
+  },
   "author": "Franciscofernando",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+      "bower": "^1.8.0"
+  }
 }

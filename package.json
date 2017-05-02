@@ -5,6 +5,7 @@
   "main": "./app/main.js",
   "scripts": {
     "start": "electron .",
+    "postinstall": "cd ./app && npm install",
     "build:windows": "node ./builders/windows.js"
   },
   "author": "Franciscofernando",
